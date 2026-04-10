@@ -1,0 +1,13 @@
+bin/
+obj/
+*.exe
+*.dll
+*.txt
+*.user
+*.suo
+*.log
+*.cache
+*.tmp
+packages/
+.vs/
+_ReSharper*/
