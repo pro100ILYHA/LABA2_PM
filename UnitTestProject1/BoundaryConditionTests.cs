@@ -23,7 +23,6 @@ namespace MusicCollectionTests
             Assert.AreEqual(0, track.Year);
         }
 
-        // Тест 2: поля могут быть пустыми строками — конструктор не должен падать
         [TestMethod]
         public void MusicTrack_PolyaCanBeNull()
         {
