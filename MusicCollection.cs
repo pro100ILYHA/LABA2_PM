@@ -18,6 +18,15 @@ namespace WindowsFormsApp1
             LoadTracks();
         }
 
+        public List<MusicTrack> GetTracks()
+        {
+            return tracks;
+        }
+        public ListView GetListView()
+        {
+            return listView;
+        }
+
         private void LoadTracks()
         {
             listView.Items.Clear();
