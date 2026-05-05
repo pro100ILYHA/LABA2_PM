@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace WindowsFormsApp1
 {
@@ -33,21 +35,56 @@ namespace WindowsFormsApp1
             var okButton = new Button { Text = "OK", Location = new System.Drawing.Point(10, 140), Size = new System.Drawing.Size(75, 23) };
             var cancelButton = new Button { Text = "Отмена", Location = new System.Drawing.Point(95, 140), Size = new System.Drawing.Size(75, 23) };
 
+            
+
             okButton.Click += (sender, e) =>
             {
+                Artist = artistTextBox.Text;
+                Title = titleTextBox.Text;
+                Genre = genreTextBox.Text;
+                
+                if (string.IsNullOrEmpty(Artist))
+                {
+                    MessageBox.Show("Поле исполнитель не может быть пустым.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Title))
+                {
+                    MessageBox.Show("Поле название не может быть пустым.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Genre))
+                {
+                    MessageBox.Show("Поле жанр не может быть пустым.");
+                    return;
+                }
+
                 if (int.TryParse(yearTextBox.Text, out int year))
                 {
-                    Artist = artistTextBox.Text;
-                    Title = titleTextBox.Text;
-                    Genre = genreTextBox.Text;
                     Year = year;
-                    DialogResult = DialogResult.OK;
-                    Close();
+                    if (Year < 0)
+                    {
+                        MessageBox.Show("Год выпуска не может быть отрицательным.");
+                        return;
+                    }
+
+                    if (Year > 2026)
+                    {
+                        MessageBox.Show("Год выпуска не может быть больше текущего.");
+                        return;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Пожалуйста, введите корректный год.");
+                    return;
                 }
+
+                DialogResult = DialogResult.OK;
+                Close();
+
             };
 
             cancelButton.Click += (sender, e) => { DialogResult = DialogResult.Cancel; Close(); };
